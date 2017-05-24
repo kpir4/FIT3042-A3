@@ -4,9 +4,10 @@ use File::Copy::Recursive qw(fcopy rcopy dircopy fmove rmove dirmove);
 
 copy_dir("Test");
 find_dup();
+delete_files("dupFile");
 
 sub find_dup{
-	my $dirname="Test1";
+	my $dirname="Test3";
 	my $tempfile="myTempfileName";
 	my $dupfile="dupFile";
 	my $search="searchTerms";
@@ -31,6 +32,17 @@ sub find_dup{
 
 
 sub copy_dir{
-	my $newDir = "Test1";
+	my $newDir = "Test3";
 	dircopy($_[0], $newDir) or die $!;
+}
+
+
+sub delete_files{
+	my $search = $_[0];
+	open (my $info, '<', $search) or die "Could not open $search: $!";
+
+	while(my $file = (<$info>)){
+		chomp($file);
+		unlink($file);
+	}
 }
