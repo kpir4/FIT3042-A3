@@ -61,5 +61,5 @@ sub bzip2{
 
 sub compress{
 	system("tar -cf $_[0].tar $_[0]");
-	system("compress -vf $_[0].tar");
+	system("compress -f $_[0].tar");
 }
