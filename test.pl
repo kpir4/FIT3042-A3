@@ -7,7 +7,7 @@ find_dup();
 delete_files("dupFile");
 
 sub find_dup{
-	my $dirname="Test3";
+	my $dirname="Test1";
 	my $tempfile="myTempfileName";
 	my $dupfile="dupFile";
 	my $search="searchTerms";
@@ -21,10 +21,10 @@ sub find_dup{
 	while(my $file = (<$info>)){
 		chomp($file);
 		if ($counter == 0){
-		   system("grep '$file' $tempfile > $dupfile");
+		   system("grep '$file' $tempfile | tail -n +2 > $dupfile");
 		}
 		else{
-		   system("grep '$file' $tempfile >> $dupfile");
+		   system("grep '$file' $tempfile | tail -n +2 >> $dupfile");
 		}
 		$counter++;
 	}
@@ -32,7 +32,7 @@ sub find_dup{
 
 
 sub copy_dir{
-	my $newDir = "Test3";
+	my $newDir = "Test1";
 	dircopy($_[0], $newDir) or die $!;
 }
 
