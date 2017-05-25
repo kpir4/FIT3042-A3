@@ -5,6 +5,7 @@ use File::Copy::Recursive qw(fcopy rcopy dircopy fmove rmove dirmove);
 copy_dir("Test");
 find_dup();
 delete_files("dupFile");
+gzip("Test1");
 
 sub find_dup{
 	my $dirname="Test1";
@@ -45,4 +46,20 @@ sub delete_files{
 		chomp($file);
 		unlink($file);
 	}
+}
+
+
+sub gzip{
+	system("tar -czvf $_[0].tar.gz $_[0]");
+}
+
+
+sub bzip2{
+	system("tar -jcvf $_[0].tar.bz2 $_[0]");
+}
+
+
+sub compress{
+	system("tar -cf $_[0].tar $_[0]");
+	system("compress -vf $_[0].tar");
 }
